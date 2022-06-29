@@ -121,5 +121,18 @@ class PostCodeController extends Controller
     public function destroy($id)
     {
         //
+        $dataDelete = PostCode::findOrFail($id);
+
+        try {
+            PostCode::destroy($dataDelete->id);
+
+            return response()->json("Deleted Success", Response::HTTP_OK);
+
+        } catch (QueryException $e) {
+            return response()->json(
+               $e, Response::HTTP_NOT_FOUND
+            );
+        }
+
     }
 }
