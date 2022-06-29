@@ -14,7 +14,7 @@ class PostCode extends Model
     public function setAttribute($key, $value)
     {
 
-    if(in_array($key, ['post_code', 'urban_village','sub_district','city','province'])){
+    if(in_array($key, ['urban_village','sub_district','city','province'])){
         $this->attributes[$key] = strtoupper($value);
 
         return $this;
@@ -23,9 +23,11 @@ class PostCode extends Model
     return parent::setAttribute($key, $value);
     }
 
+    /*
     public function getCityAttribute($value)
     {
         return ucfirst($value);
     }
+    */
 
 }
