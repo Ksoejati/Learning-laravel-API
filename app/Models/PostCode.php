@@ -11,13 +11,6 @@ class PostCode extends Model
 
     protected $fillable = ['post_code','urban_village','sub_district','city','province'];
 
-    /*
-    public function setCityAttribute($value)
-    {
-        $this->attributes['key'] = strtoupper($value);
-    }
-    */
-
     public function setAttribute($key, $value)
     {
     if(in_array($key, ['post_code', 'urban_village','sub_district','city','province'])){
@@ -27,7 +20,7 @@ class PostCode extends Model
     }
 
     return parent::setAttribute($key, $value);
-}
+    }
 
     public function getCityAttribute($value)
     {
