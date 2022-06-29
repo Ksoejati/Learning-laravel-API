@@ -13,6 +13,7 @@ class PostCode extends Model
 
     public function setAttribute($key, $value)
     {
+
     if(in_array($key, ['post_code', 'urban_village','sub_district','city','province'])){
         $this->attributes[$key] = strtoupper($value);
 
