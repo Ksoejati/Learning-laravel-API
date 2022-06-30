@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
+use function PHPUnit\Framework\isNull;
+
 class PostCodeController extends Controller
 {
     /**
@@ -84,16 +86,21 @@ class PostCodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($post_code)
     {
         //
-        $data = PostCode::findOrFail($id);
-        $response = [
-            'message' => 'Data yang anda cari :',
-            'data' => $data
-        ];
+        $data = PostCode::Where('post_code', $post_code)->get(); //findOrFail($id);
 
-        return response()-> json($response, Response::HTTP_OK);
+
+        if ($data->isEmpty()) {
+            return response()->json("data tidak ada", Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            return response()-> json($data, Response::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()-> json($e->errorInfo, Response::HTTP_UNPROCESSABLE_ENTITY);
+        };
     }
 
     /**
@@ -143,10 +150,6 @@ class PostCodeController extends Controller
         } catch (QueryException $e) {
             return response()->json($e->errorInfo, Response::HTTP_NOT_MODIFIED);
         }
-
-
-
-
     }
 
     /**
