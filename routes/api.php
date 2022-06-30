@@ -23,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::GET('/postcode', [PostCodeController::class, 'index']);
 Route::POST('/postcode', [PostCodeController::class, 'store']);
 Route::DELETE('/postcode/{id}', [PostCodeController::class, 'destroy']);
+Route::GET('/postcode/{id}', [PostCodeController::class, 'show']);
+route::PUT('/postcode/{id}', [PostCodeController::class, 'update']);
