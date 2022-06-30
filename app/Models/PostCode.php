@@ -11,6 +11,7 @@ class PostCode extends Model
 
     protected $fillable = ['post_code','urban_village','sub_district','city','province'];
 
+    //set upper attribute before insert
     public function setAttribute($key, $value)
     {
 
@@ -22,6 +23,12 @@ class PostCode extends Model
 
     return parent::setAttribute($key, $value);
     }
+
+    //set date with format y-m-d
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d'
+    ];
 
     /*
     public function getCityAttribute($value)
