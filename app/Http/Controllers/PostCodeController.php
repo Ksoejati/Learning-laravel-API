@@ -116,7 +116,37 @@ class PostCodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = PostCode::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'post_code' => ['numeric','required'],
+            'urban_village' => ['required'],
+            'sub_district' => ['required'],
+            'city' => ['required'],
+            'province' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(),
+            Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        try {
+            $data->update($request->all());
+            $response = [
+                'message' => 'Data has been update',
+                'data' => $request->all()
+            ];
+
+            return response()->json($response, Response::HTTP_OK);
+
+        } catch (QueryException $e) {
+            return response()->json($e->errorInfo, Response::HTTP_NOT_MODIFIED);
+        }
+
+
+
+
     }
 
     /**
