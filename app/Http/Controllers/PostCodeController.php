@@ -87,6 +87,13 @@ class PostCodeController extends Controller
     public function show($id)
     {
         //
+        $data = PostCode::findOrFail($id);
+        $response = [
+            'message' => 'Data yang anda cari :',
+            'data' => $data
+        ];
+
+        return response()-> json($response, Response::HTTP_OK);
     }
 
     /**
