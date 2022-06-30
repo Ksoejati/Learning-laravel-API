@@ -37,4 +37,9 @@ class PostCode extends Model
     }
     */
 
+    //Scope Zone
+    public function scopeFindDataByPosCode($query, $post_code){
+        return $query->Where('post_code', $post_code);
+    }
+
 }

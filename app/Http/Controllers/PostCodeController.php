@@ -89,7 +89,7 @@ class PostCodeController extends Controller
     public function show($post_code)
     {
         //
-        $data = PostCode::Where('post_code', $post_code)->get(); //findOrFail($id);
+        $data = PostCode::FindDataByPosCode($post_code)->get();//Where('post_code', $post_code)->get(); //findOrFail($id);
 
 
         if ($data->isEmpty()) {
